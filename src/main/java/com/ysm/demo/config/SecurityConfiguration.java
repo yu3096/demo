@@ -43,28 +43,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    /*
     http.csrf().disable()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
-        .addFilter(new JwtAuthenticationFilter(authenticationManager()))
-        .addFilter(new JwtAuthorizationFilter(authenticationManager(), this.userRepository))
-        .authorizeRequests()
-        .antMatchers("/h2-console").permitAll()
-        .antMatchers(HttpMethod.POST, "/login").permitAll()
-        .antMatchers("/api/public/management/*").hasRole("MANAGER")
-        .antMatchers("/api/public/admin/*").hasRole("ADMIN")
-        .anyRequest().authenticated();
-
-     */
-    http.httpBasic().disable()
-        .csrf().disable()
-        .authorizeRequests()
-        .anyRequest().permitAll()
-
+          .authorizeRequests()
+            .antMatchers("/h2-console/**").permitAll()
+            .antMatchers(HttpMethod.POST, "/login").permitAll()
+            .antMatchers("/api/public/management/*").hasRole("MANAGER")
+            .antMatchers("/api/public/admin/*").hasRole("ADMIN")
+            .anyRequest().authenticated()
         .and()
-        .headers().frameOptions().disable()
-    ;
+          .headers().frameOptions().disable()
+        .and()
+          .addFilter(new JwtAuthenticationFilter(authenticationManager()))
+          .addFilter(new JwtAuthorizationFilter(authenticationManager(), this.userRepository));
   }
 
   @Bean
