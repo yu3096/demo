@@ -1,4 +1,4 @@
-package com.ysm.demo.security.dto;
+package com.ysm.demo.init.database.tables;
 
 import lombok.Getter;
 import lombok.Setter;

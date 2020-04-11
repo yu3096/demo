@@ -1,6 +1,6 @@
 package com.ysm.demo.security.controller;
 
-import com.ysm.demo.security.dto.User;
+import com.ysm.demo.init.database.tables.User;
 import com.ysm.demo.security.repository.UserRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

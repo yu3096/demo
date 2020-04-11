@@ -36,6 +36,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
+    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.1.2'
     compile group: 'com.auth0', name: 'java-jwt', version: '3.10.2'
 
     runtimeOnly 'com.h2database:h2'

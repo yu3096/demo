@@ -1,6 +1,6 @@
 package com.ysm.demo.security.service;
 
-import com.ysm.demo.security.dto.User;
+import com.ysm.demo.init.database.tables.User;
 import com.ysm.demo.security.dto.UserPrincipal;
 import com.ysm.demo.security.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;

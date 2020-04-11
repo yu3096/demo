@@ -1,5 +1,6 @@
 package com.ysm.demo.security.dto;
 
+import com.ysm.demo.init.database.tables.User;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

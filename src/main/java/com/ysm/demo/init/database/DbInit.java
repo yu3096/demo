@@ -1,6 +1,6 @@
-package com.ysm.demo.init;
+package com.ysm.demo.init.database;
 
-import com.ysm.demo.security.dto.User;
+import com.ysm.demo.init.database.tables.User;
 import com.ysm.demo.security.repository.UserRepository;
 import java.util.Arrays;
 import java.util.List;
@@ -17,14 +17,14 @@ public class DbInit implements CommandLineRunner {
   private final PasswordEncoder passwordEncoder;
 
   @Override
-    public void run(String... args) throws Exception {
-      // delete all
-      this.userRepository.deleteAll();
+  public void run(String... args) throws Exception {
+    // delete all
+    this.userRepository.deleteAll();
 
-      // create user
-      User admin = new User("admin", this.passwordEncoder.encode("1111"), "ADMIN", "ACCESS_TEST1,ACCESS_TEST2");
-      User manager = new User("manager", this.passwordEncoder.encode("1111"), "MANAGER", "ACCESS_TEST1");
-      User user = new User("user", this.passwordEncoder.encode("1111"), "USER", "");
+    // create user
+    User admin = new User("admin", this.passwordEncoder.encode("1111"), "ADMIN", "ACCESS_TEST1,ACCESS_TEST2");
+    User manager = new User("manager", this.passwordEncoder.encode("1111"), "MANAGER", "ACCESS_TEST1");
+    User user = new User("user", this.passwordEncoder.encode("1111"), "USER", "");
 
     List<User> users = Arrays.asList(admin, manager, user);
 
