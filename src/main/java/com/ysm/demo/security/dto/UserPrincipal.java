@@ -1,6 +1,7 @@
 package com.ysm.demo.security.dto;
 
 import com.ysm.demo.init.database.tables.User;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -45,21 +46,21 @@ public class UserPrincipal implements UserDetails {
 
   @Override
   public boolean isAccountNonExpired() {
-    return true;
+    return LocalDateTime.now().isBefore(this.user.getExpiredDate());
   }
 
   @Override
   public boolean isAccountNonLocked() {
-    return true;
+    return this.user.getLoginFailCnt() < 6;
   }
 
   @Override
   public boolean isCredentialsNonExpired() {
-    return true;
+    return LocalDateTime.now().minusMonths(6).isBefore(this.user.getPasswordChangeDate());
   }
 
   @Override
   public boolean isEnabled() {
-    return this.user.getActive() == 1;
+    return "Y".equals(this.user.getActiveYn());
   }
 }

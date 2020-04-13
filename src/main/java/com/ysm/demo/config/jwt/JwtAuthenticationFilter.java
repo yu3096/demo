@@ -18,6 +18,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @RequiredArgsConstructor
@@ -58,5 +59,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                       .sign(Algorithm.HMAC512(JwtProperties.SECRET.getBytes()));
 
     response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + token);
+  }
+
+  @Override
+  protected void unsuccessfulAuthentication(HttpServletRequest request,
+      HttpServletResponse response, AuthenticationException failed)
+      throws IOException, ServletException {
+    System.out.println(failed.getClass());
+    super.unsuccessfulAuthentication(request, response, failed);
   }
 }

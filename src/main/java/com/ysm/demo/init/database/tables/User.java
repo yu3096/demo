@@ -1,5 +1,8 @@
 package com.ysm.demo.init.database.tables;
 
+import com.ysm.demo.init.database.tables.dataClasses.CorrectionInformation;
+import com.ysm.demo.init.database.tables.dataClasses.UserId;
+import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,32 +10,44 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Getter
 @Setter
-public class User {
+public class User extends CorrectionInformation{
+  @EmbeddedId
+  private UserId userid;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
-
-  @Column(nullable = false)
+  @Column(nullable = false, length = 50)
   private String username;
   @Column(nullable = false)
   private String password;
 
-  private int active;
   private String roles = "";
   private String permissions = "";
+
+  @ColumnDefault("'Y'")
+  private String activeYn;                  //활성화 여부
+
+  @ColumnDefault("0")
+  private int loginFailCnt;                 //로그인 실패횟수
+  @ColumnDefault("'9999-12-31'")
+  private LocalDateTime expiredDate;        //계정 만료일
+  private LocalDateTime passwordChangeDate; //비밀번호 변경일
+
+  @PrePersist
+  private void setDefault(){
+    this.activeYn = "Y";
+    this.expiredDate = LocalDateTime.of(9999, 12, 31, 23, 59, 59);
+    this.passwordChangeDate = LocalDateTime.now();//.minusMonths(3);
+  }
 
   public User(String username, String password, String roles, String permissions) {
     this.username = username;
     this.password = password;
     this.roles = roles;
     this.permissions = permissions;
-
-    this.active = 1;
   }
 
   protected User() {
