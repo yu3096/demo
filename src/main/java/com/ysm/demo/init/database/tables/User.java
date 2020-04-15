@@ -1,7 +1,7 @@
 package com.ysm.demo.init.database.tables;
 
 import com.ysm.demo.init.database.tables.dataClasses.CorrectionInformation;
-import com.ysm.demo.init.database.tables.dataClasses.UserId;
+import com.ysm.demo.init.database.tables.dataClasses.UserPks;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +17,7 @@ import org.hibernate.annotations.ColumnDefault;
 @Setter
 public class User extends CorrectionInformation{
   @EmbeddedId
-  private UserId userid;
+  private UserPks userId;
 
   @Column(nullable = false, length = 50)
   private String username;
