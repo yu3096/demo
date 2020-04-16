@@ -1,5 +1,6 @@
 package com.ysm.demo.security.dto;
 
+import com.ysm.demo.config.principal.UserPrincipalProperties;
 import com.ysm.demo.init.database.tables.User;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class UserPrincipal implements UserDetails {
     });
 
     this.user.getRoleList().forEach(p -> {
-      GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + p);
+      GrantedAuthority authority = new SimpleGrantedAuthority(UserPrincipalProperties.grantedPrefix + p);
       authorities.add(authority);
     });
 
@@ -51,12 +52,12 @@ public class UserPrincipal implements UserDetails {
 
   @Override
   public boolean isAccountNonLocked() {
-    return this.user.getLoginFailCnt() < 6;
+    return this.user.getLoginFailCnt() <= UserPrincipalProperties.loginFailCount;
   }
 
   @Override
   public boolean isCredentialsNonExpired() {
-    return LocalDateTime.now().minusMonths(6).isBefore(this.user.getPasswordChangeDate());
+    return LocalDateTime.now().minusMonths(UserPrincipalProperties.passwordChangeMonth).isBefore(this.user.getPasswordChangeDate());
   }
 
   @Override
