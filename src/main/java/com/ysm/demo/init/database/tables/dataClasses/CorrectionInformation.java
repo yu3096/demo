@@ -1,6 +1,7 @@
 package com.ysm.demo.init.database.tables.dataClasses;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -17,10 +18,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 public abstract class CorrectionInformation {
   @CreationTimestamp
   private LocalDateTime createDate;
-  @AttributeOverride(name = "userUuid", column = @Column(name = "createUser"))
-  private UserPks createUser;
+  private UUID createUser;
+
   @UpdateTimestamp
   private LocalDateTime updateDate;
-  @AttributeOverride(name = "userUuid", column = @Column(name = "updateUser"))
-  private UserPks updateUser;
+  private UUID updateUser;
 }

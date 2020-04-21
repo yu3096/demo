@@ -1,8 +1,6 @@
 package com.ysm.demo.init.database.tables;
 
-import com.sun.istack.NotNull;
 import com.ysm.demo.init.database.tables.dataClasses.CorrectionInformation;
-import com.ysm.demo.init.database.tables.dataClasses.MenuPks;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,14 +11,21 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@SequenceGenerator(
+        name = "MENU_SEQ_GENERATOR"
+        ,sequenceName = "MENU_SEQ"
+        ,initialValue = 1
+        ,allocationSize = 1
+)
 public class Menu extends CorrectionInformation {
-    @EmbeddedId
-    private MenuPks menuSeq;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE
+                   ,generator = "MENU_SEQ_GENERATOR")
+    public Long menuSeq;
 
-    @Embedded
-    private MenuPks parentMenuSeq;
+    private Long parentMenuSeq;
 
     public String menuName;
     public String menuDesc;

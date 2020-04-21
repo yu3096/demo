@@ -1,7 +1,6 @@
 package com.ysm.demo.init.database.tables;
 
 import com.ysm.demo.init.database.tables.dataClasses.CorrectionInformation;
-import com.ysm.demo.init.database.tables.dataClasses.UserPks;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,14 +9,19 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
+
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Getter
 @Setter
 public class User extends CorrectionInformation{
-  @EmbeddedId
-  private UserPks userId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GenericGenerator(name = "uuid2", strategy = "uuid2")
+  private UUID userUuid;
 
   @Column(nullable = false, length = 50)
   private String username;
