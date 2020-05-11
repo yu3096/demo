@@ -19,20 +19,26 @@ import javax.persistence.*;
         ,initialValue = 1
         ,allocationSize = 1
 )
-public class Menu extends CorrectionInformation {
+public class MENU extends CorrectionInformation {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE
                    ,generator = "MENU_SEQ_GENERATOR")
+    @Column(name = "MENU_SEQ")
     public Long menuSeq;
 
+    @Column(name = "PARENT_MENU_SEQ")
     private Long parentMenuSeq;
 
+    @Column(name = "MENU_NAME")
     public String menuName;
+    @Column(name = "MENU_DESC")
     public String menuDesc;
+    @Column(name = "MENU_URI")
     public String menuUri;
+    @Column(name = "MENU_TYPE")
     public String menuType;
 
-    @Column(nullable = false)
+    @Column(name = "ORDER_NUM", nullable = false)
     public int orderNum;
 
 }

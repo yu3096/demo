@@ -1,9 +1,9 @@
 package com.ysm.demo.security.controller;
 
-import com.ysm.demo.init.database.tables.User;
+import com.ysm.demo.init.database.tables.USER;
 import com.ysm.demo.security.repository.UserRepository;
 import java.util.List;
-import java.util.Map;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -32,12 +32,12 @@ public class PublicRestApiController {
   }
 
   @GetMapping("admin/usersAll")
-  public List<User> allUsers() {
+  public List<USER> allUsers() {
     return this.userRepository.findAll();
   }
 
   @GetMapping("admin/usersAdmin")
-  public User AdminUsers() {
+  public USER AdminUsers() {
     return this.userRepository.findByUsername("admin");
   }
 

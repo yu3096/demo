@@ -12,7 +12,7 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CommonCode extends CorrectionInformation {
+public class COMMON_CODE extends CorrectionInformation {
   @EmbeddedId
   private CommonCodePks commonCodePks;
 
@@ -21,7 +21,7 @@ public class CommonCode extends CorrectionInformation {
   @Column(nullable = false)
   private int orderNum;
 
-  public CommonCode(CommonCodePks commonCodePks, String description, int orderNum){
+  public COMMON_CODE(CommonCodePks commonCodePks, String description, int orderNum){
     this.commonCodePks = commonCodePks;
     this.description = description;
     this.orderNum = orderNum;

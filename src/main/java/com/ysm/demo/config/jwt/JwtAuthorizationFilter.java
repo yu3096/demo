@@ -2,7 +2,7 @@ package com.ysm.demo.config.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.ysm.demo.init.database.tables.User;
+import com.ysm.demo.init.database.tables.USER;
 import com.ysm.demo.security.dto.UserPrincipal;
 import com.ysm.demo.security.repository.UserRepository;
 import java.io.IOException;
@@ -53,7 +53,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
           .getSubject();
 
       if (username != null) {
-        User user = userRepository.findByUsername(username);
+        USER user = userRepository.findByUsername(username);
         UserPrincipal principal = new UserPrincipal(user);
         UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(username,
             null, principal.getAuthorities());

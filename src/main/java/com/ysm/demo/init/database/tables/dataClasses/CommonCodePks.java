@@ -13,9 +13,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class CommonCodePks implements Serializable {
-  @Column(length = 10)
+  @Column(name = "COMMON_GRP", length = 10)
   private String commonGrp;
-  @Column(length = 10)
+  @Column(name = "COMMON_DTL", length = 10)
   private String commonDtl;
 
   public CommonCodePks(String commonGrp, String commonDtl){

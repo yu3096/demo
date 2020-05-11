@@ -1,7 +1,7 @@
 package com.ysm.demo.security.dto;
 
 import com.ysm.demo.config.principal.UserPrincipalProperties;
-import com.ysm.demo.init.database.tables.User;
+import com.ysm.demo.init.database.tables.USER;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,9 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserPrincipal implements UserDetails {
 
-  private User user;
+  private USER user;
 
-  public UserPrincipal(User user){
+  public UserPrincipal(USER user){
     this.user = user;
   }
 

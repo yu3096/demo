@@ -1,6 +1,6 @@
 package com.ysm.demo.security.service;
 
-import com.ysm.demo.init.database.tables.User;
+import com.ysm.demo.init.database.tables.USER;
 import com.ysm.demo.security.dto.UserPrincipal;
 import com.ysm.demo.security.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +18,7 @@ public class UserPrincipalDetailsService implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    User user = this.userRepository.findByUsername(username);
+    USER user = this.userRepository.findByUsername(username);
     UserPrincipal userPrincipal = new UserPrincipal(user);
 
     return userPrincipal;

@@ -2,6 +2,7 @@ package com.ysm.demo.init.database.tables;
 
 import com.ysm.demo.init.database.tables.dataClasses.CorrectionInformation;
 import java.time.LocalDateTime;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
@@ -17,27 +17,33 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Getter
 @Setter
-public class User extends CorrectionInformation{
+public class USER extends CorrectionInformation{
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @GenericGenerator(name = "uuid2", strategy = "uuid2")
-  private UUID userUuid;
+  @GeneratedValue(generator = "CustomUUID")
+  @GenericGenerator(name = "CustomUUID", strategy = "com.ysm.demo.init.database.tables.dataClasses.CustomUUID")
+  @Column(name = "USER_UUID", columnDefinition = "binary(16)")
+  private String userUuid;
 
-  @Column(nullable = false, length = 50)
+  @Column(name = "USERNAME", nullable = false, length = 50)
   private String username;
-  @Column(nullable = false)
+  @Column(name = "PASSWORD", nullable = false)
   private String password;
 
+  @Column(name = "ROLES")
   private String roles = "";
+  @Column(name = "PERMISSIONS")
   private String permissions = "";
-
+  @Column(name = "ACTIVE_YN")
   @ColumnDefault("'Y'")
   private String activeYn;                  //활성화 여부
 
+  @Column(name = "LOGIN_FAIL_CNT")
   @ColumnDefault("0")
   private int loginFailCnt;                 //로그인 실패횟수
+  @Column(name = "EXPIRED_DATE")
   @ColumnDefault("'9999-12-31'")
   private LocalDateTime expiredDate;        //계정 만료일
+  @Column(name = "PASSWORD_CHANGE_DATE")
   private LocalDateTime passwordChangeDate; //비밀번호 변경일
 
   @PrePersist
@@ -47,14 +53,14 @@ public class User extends CorrectionInformation{
     this.passwordChangeDate = LocalDateTime.now();//.minusMonths(3);
   }
 
-  public User(String username, String password, String roles, String permissions) {
+  public USER(String username, String password, String roles, String permissions) {
     this.username = username;
     this.password = password;
     this.roles = roles;
     this.permissions = permissions;
   }
 
-  protected User() {
+  protected USER() {
   }
 
   public List<String> getRoleList() {
