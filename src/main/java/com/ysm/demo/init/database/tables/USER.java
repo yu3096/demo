@@ -21,7 +21,7 @@ public class USER extends CorrectionInformation{
   @Id
   @GeneratedValue(generator = "CustomUUID")
   @GenericGenerator(name = "CustomUUID", strategy = "com.ysm.demo.init.database.tables.dataClasses.CustomUUID")
-  @Column(name = "USER_UUID", columnDefinition = "binary(16)")
+  @Column(name = "USER_UUID", columnDefinition = "varchar(41)")
   private String userUuid;
 
   @Column(name = "USERNAME", nullable = false, length = 50)
